@@ -5,35 +5,24 @@ pipeline{
         maven 'mymaven'
     }
     
-    agent any  // node where we have to run pipeline
+    agent {label 'win_slave'}
+    
     stages{
-        stage('Clone the repo')
+        stage('clone the repo')
         {
             steps{
-            git 'path to repo'
+                git 'path to repo'
             }
         }
         
-        stage('CompileCode'){
-            steps{
-                sh 'mvn compile'
-            }
-        }
-        
-        stage('TestCode'){
+         stage('Seleniumtest')
+        {
             steps{
                 sh 'mvn test'
             }
         }
-        
-        stage('PackgeCode'){
-            steps{
-                sh 'mvn package'
-            }
-        }
-        
-        
     }
+    
 }
 ===========================================================
 package seleniumjenkins;
